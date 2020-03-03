@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using RH_Life.Entities.Enums;
 
 namespace RH_Life.Entities
 {
@@ -27,6 +28,7 @@ namespace RH_Life.Entities
                 Console.WriteLine("===================================");
                 Console.WriteLine();
                 Console.WriteLine($"Nome funcionario: {listRh[i].Nome}");
+                Console.WriteLine($"Cargo Funcionario: {listRh[i].Cargo}");
                 Console.WriteLine($"Salario unitario  {listRh[i].Salario.ToString("F2", CultureInfo.InvariantCulture)} Rendimento anual sem imposto: {rendimento.ToString("F2", CultureInfo.InvariantCulture)}");
                 Console.WriteLine($"Salario unitario {listRh[i].Salario.ToString("F2", CultureInfo.InvariantCulture)} Rendimento anual com imoposto {(rendimento.ToString("F2", CultureInfo.InvariantCulture) + percento)}");
                 Console.WriteLine("===================================");
@@ -57,8 +59,10 @@ namespace RH_Life.Entities
             Console.WriteLine("Digitar o CPF do Empregado: ");
             string CPFAntigo = Console.ReadLine();
             var mudaStatus= listRh.FirstOrDefault(x => CPFAntigo == x.CPF);
-            Console.WriteLine("Altere o Status do funcionario: ");
-            //mudaStatus.Status = Console.ReadLine();
+            Status status = (Status)Enum.Parse(typeof(Status), "2"); // Usei o conversor do tipo Status para String
+            mudaStatus.Status = status;//atribui o Status do banco do status da funcção, 
+            Console.WriteLine($"Funcionario {mudaStatus.Nome} foi desligado com sucesso ");
+
         }
 
         

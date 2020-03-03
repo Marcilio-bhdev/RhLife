@@ -62,7 +62,6 @@ namespace RH_Life.Entities
             Status status = (Status)Enum.Parse(typeof(Status), "2"); // Usei o conversor do tipo Status para String
             mudaStatus.Status = status;//atribui o Status do banco do status da funcção, 
             Console.WriteLine($"Funcionario {mudaStatus.Nome} foi desligado com sucesso ");
-
         }
 
         public void ListarFuncionario()
@@ -83,6 +82,36 @@ namespace RH_Life.Entities
                 Console.WriteLine($"Status: {listRh[i].Status}");
                 Console.WriteLine("===================================");
             }
+        }
+        public void FuncioSexo() 
+        {
+            Console.WriteLine("===================================");
+            Console.WriteLine("|        Listando por sexo       |");
+            Console.WriteLine("===================================");
+            Console.WriteLine();
+            Console.WriteLine("Favor informe o sexo: ");
+            var sex = char.Parse(Console.ReadLine());
+            if (sex == 'm' || sex == 'M')
+            {
+                for (int i = 0; i < listRh.Count; i++)
+                {
+                    Console.WriteLine($"Nome funcionario: {listRh[i].Nome}");
+                    Console.WriteLine($"Sexo: {listRh[i].Sexo}");
+                    Console.WriteLine("===================================");
+                }
+            }
+            //if (sex == 'f' || sex == 'F')
+            //{
+            //    for (int i = 0; i < listRh.Count; i++)
+            //    {
+            //        Console.WriteLine($"Nome funcionario: {listRh[i].Nome}");
+            //        Console.WriteLine($"Sexo: {listRh[i].Sexo}");
+            //        Console.WriteLine("===================================");
+            //    }
+            //}
+
+
+
         }
 
         public void FuncMaisVelho()

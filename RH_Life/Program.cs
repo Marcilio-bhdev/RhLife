@@ -60,15 +60,22 @@ namespace RH_Life
                     banco.ListarFuncionario();
                     break;
                 case 6:
+                    banco.FuncioSexo();
                     break;
                 case 7:
+                    banco.FuncMaisVelho(); 
                     break;
                 case 8:
+                    banco.FuncMaisNovo();
                     break;
                 case 9:
+                    banco.FuncIdade();
+                    break;
+                case 10:
+                    banco.FuncNascionalidade();
                     break;
                 default:
-                    Environment.Exit(10);
+                    Environment.Exit(11);
                     break;
             }
         }

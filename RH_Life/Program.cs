@@ -25,9 +25,9 @@ namespace RH_Life
         {
             Console.Clear();
             Console.WriteLine("==========================");
-            Console.WriteLine("     Sistema RHLife       ");
-            Console.WriteLine("     Seja Bem vindo       ");
-            Console.WriteLine("===========================");
+            Console.WriteLine("|     Sistema RHLife     |");
+            Console.WriteLine("|     Seja Bem vindo     |");
+            Console.WriteLine("==========================");
             Console.WriteLine("1 - Cadastrar Funcionario:");
             Console.WriteLine("2 - Alterar Salário: ");
             Console.WriteLine("3 - Desligar  Funcionario:  ");

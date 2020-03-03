@@ -113,11 +113,11 @@ namespace RH_Life.Entities
             var sex = listRh.OrderBy(x => x.Sexo);
             foreach (var item in sex)
             {
-                Console.WriteLine("===============");
-                Console.WriteLine(item.Nome);
-                Console.WriteLine(item.Salario.ToString("F2",CultureInfo.InvariantCulture));
-                Console.WriteLine(item.Sexo);
-                Console.WriteLine("===============");
+                Console.WriteLine("======================");
+                Console.WriteLine($"Nome: {item.Nome}");
+                Console.WriteLine($"Salario: {item.Salario.ToString("F2",CultureInfo.InvariantCulture)}");
+                Console.WriteLine($"Sexo: {item.Sexo}");
+                Console.WriteLine("======================");
             }
         }
 
@@ -128,7 +128,7 @@ namespace RH_Life.Entities
             Console.WriteLine("===================================");
             Console.WriteLine();
             var maisVelho = listRh.OrderBy(x => x.Data_Nasc).FirstOrDefault();
-            Console.WriteLine($"Nome funcionario: {maisVelho.Nome}");
+            Console.WriteLine($"Nome: {maisVelho.Nome}");
             Console.WriteLine($"Data de Nascimento: {maisVelho.Data_Nasc}");
             Console.WriteLine("===================================");
         }
@@ -139,7 +139,7 @@ namespace RH_Life.Entities
             Console.WriteLine("===================================");
             Console.WriteLine();
             var MaisNovo = listRh.OrderByDescending(x => x.Data_Nasc).FirstOrDefault();
-            Console.WriteLine($"Nome funcionario: {MaisNovo.Nome}");
+            Console.WriteLine($"Nome: {MaisNovo.Nome}");
             Console.WriteLine($"Data de Nascimento: {MaisNovo.Data_Nasc}");
             Console.WriteLine("===================================");
 
@@ -155,7 +155,7 @@ namespace RH_Life.Entities
             {
                 Console.WriteLine("===================================");
                 Console.WriteLine($"Nome: {item.Nome}");
-                Console.WriteLine($"Idade: {DateTime.Now.Year - item.Data_Nasc.Year}");
+                Console.WriteLine($"Idade: {DateTime.Now.Year - item.Data_Nasc.Year} anos");
                 Console.WriteLine("===================================");
             }
             

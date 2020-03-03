@@ -156,6 +156,20 @@ namespace RH_Life.Entities
 
         public void FuncNascionalidade()
         {
+            Console.WriteLine("===================================");
+            Console.WriteLine("|  Funcionario Por Nacionalidade  |");
+            Console.WriteLine("===================================");
+            Console.WriteLine();
+            var nacao = listRh.OrderBy(x => x.Data_Nasc);
+
+            foreach (var item in nacao)
+            {
+                Console.WriteLine("===================================");
+                Console.WriteLine($"Nome funcionario: {item.Nome}");
+                Console.WriteLine($"Idade Funcionario: {item.Nacionalidade}");
+                Console.WriteLine("===================================");
+
+            }
 
         }
     }

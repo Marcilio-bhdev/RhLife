@@ -19,20 +19,32 @@ namespace RH_Life.Entities
 
         public void FolhaDePagamento()
         {
+            double Total = 0;
+            double TotalComImposto = 0;
             for (int i = 0; i < listRh.Count; i++)
             {
-                double percento = (listRh[i].Salario * 55)/100;
-                double rendimento = listRh[i].Salario * 12;
+                double percento = ((listRh[i].Salario * 0.55)+listRh[i].Salario);
+                
                 Console.WriteLine("===================================");
                 Console.WriteLine("|        Folha de Pagamento       |");
                 Console.WriteLine("===================================");
                 Console.WriteLine();
                 Console.WriteLine($"Nome funcionario: {listRh[i].Nome}");
                 Console.WriteLine($"Cargo Funcionario: {listRh[i].Cargo}");
-                Console.WriteLine($"Salario unitario  {listRh[i].Salario.ToString("F2", CultureInfo.InvariantCulture)} Rendimento anual sem imposto: {rendimento.ToString("F2", CultureInfo.InvariantCulture)}");
-                Console.WriteLine($"Salario unitario {listRh[i].Salario.ToString("F2", CultureInfo.InvariantCulture)} Rendimento anual com imoposto {(rendimento.ToString("F2", CultureInfo.InvariantCulture) + percento)}");
+                Console.WriteLine($"Salario sem imposto: {listRh[i].Salario.ToString("F2", CultureInfo.InvariantCulture)}");
+                Console.WriteLine($"Salario com imposto: {percento.ToString("F2", CultureInfo.InvariantCulture)}");
                 Console.WriteLine("===================================");
-            } 
+                Total += listRh[i].Salario;
+                TotalComImposto += listRh[i].Salario;
+            }
+            Console.WriteLine();
+            Console.WriteLine("===================================");
+            Console.WriteLine("|     Total com e sem imposto     |");
+            Console.WriteLine("===================================");
+            Console.WriteLine($"Total sem imposto: {Total.ToString("F2",CultureInfo.InvariantCulture)}");
+            Console.WriteLine($"Total com Imposto: {TotalComImposto.ToString("F2", CultureInfo.InvariantCulture)}");
+            Console.WriteLine("===================================");
+
         }
 
         public void AlteraSalario()
@@ -59,7 +71,7 @@ namespace RH_Life.Entities
             Console.WriteLine("Digitar o CPF do Empregado: ");
             string CPFAntigo = Console.ReadLine();
             var mudaStatus= listRh.FirstOrDefault(x => CPFAntigo == x.CPF);
-            Status status = (Status)Enum.Parse(typeof(Status), "2"); // Usei o conversor do tipo Status para String
+            Status status = (Status)Enum.Parse(typeof(Status), "Desligado"); // Usei o conversor do tipo Status para String
             mudaStatus.Status = status;//atribui o Status do banco do status da funcção, 
             Console.WriteLine($"Funcionario {mudaStatus.Nome} foi desligado com sucesso ");
         }
@@ -102,15 +114,44 @@ namespace RH_Life.Entities
 
         public void FuncMaisVelho()
         {
-        
+            Console.WriteLine("===================================");
+            Console.WriteLine("|      Funcionario Mais Velho     |");
+            Console.WriteLine("===================================");
+            Console.WriteLine();
+            var maisVelho = listRh.OrderByDescending(x => x.Data_Nasc).SingleOrDefault();
+            Console.WriteLine($"Nome funcionario: {maisVelho.Nome}");
+            Console.WriteLine($"Data de Nascimento: {maisVelho.Data_Nasc}");
+            Console.WriteLine("===================================");
         }
         public void FuncMaisNovo()
         {
+            Console.WriteLine("===================================");
+            Console.WriteLine("|      Funcionario Mais Novo     |");
+            Console.WriteLine("===================================");
+            Console.WriteLine();
+            var MaisNovo = listRh.OrderBy(x => x.Data_Nasc).SingleOrDefault();
+            Console.WriteLine($"Nome funcionario: {MaisNovo.Nome}");
+            Console.WriteLine($"Data de Nascimento: {MaisNovo.Data_Nasc}");
+            Console.WriteLine("===================================");
 
         }
         public void FuncIdade()
         {
+            Console.WriteLine("===================================");
+            Console.WriteLine("|      Funcionario Por Idade     |");
+            Console.WriteLine("===================================");
+            Console.WriteLine();
+            var idade = listRh.OrderBy(x => x.Data_Nasc);
+            
+            foreach (var item in idade)
+            {
+                Console.WriteLine("===================================");
+                Console.WriteLine($"Nome funcionario: {item.Nome}");
+                Console.WriteLine($"Idade Funcionario: {DateTime.Now.Year - item.Data_Nasc.Year}");
+                Console.WriteLine("===================================");
 
+            }
+            
         }
 
         public void FuncNascionalidade()

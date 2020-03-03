@@ -115,7 +115,7 @@ namespace RH_Life.Entities
             {
                 Console.WriteLine("===============");
                 Console.WriteLine(item.Nome);
-                Console.WriteLine(item.Salario);
+                Console.WriteLine(item.Salario.ToString("F2",CultureInfo.InvariantCulture));
                 Console.WriteLine(item.Sexo);
                 Console.WriteLine("===============");
             }

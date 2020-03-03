@@ -19,7 +19,6 @@ namespace RH_Life
             {
                 escolha(banco);
             }
-
         }
 
         public static void escolha(Banco banco)
@@ -42,6 +41,7 @@ namespace RH_Life
             Console.WriteLine("11 -Sair");
             Console.Write("Entre Com uma das Opções: ");
             int opcao = int.Parse(Console.ReadLine());
+            Console.WriteLine();
             switch (opcao)
             {
                 case 1:

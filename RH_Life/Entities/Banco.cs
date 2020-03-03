@@ -56,6 +56,14 @@ namespace RH_Life.Entities
             Console.Write("Digitar o CPF do Empregado: ");
             string CPFAntigo = Console.ReadLine();
             var mudaSalario = listRh.FirstOrDefault(x => CPFAntigo == x.CPF);
+            
+            while (mudaSalario.Status != 0 || mudaSalario.Status == Status.Desligado)
+            {
+                Console.WriteLine("funcionários desligados não recebem salário!!! ");
+                Console.Write("Digite outro CPF: ");
+                CPFAntigo = Console.ReadLine();
+                mudaSalario = listRh.FirstOrDefault(x => CPFAntigo == x.CPF);
+            }
             Console.Write("Digita o novo cargo: ");
             mudaSalario.Cargo = Console.ReadLine();
             Console.Write("Altere o salario: ");
@@ -74,6 +82,7 @@ namespace RH_Life.Entities
             Status status = (Status)Enum.Parse(typeof(Status), "Desligado"); // Usei o conversor do tipo Status para String
             mudaStatus.Status = status;//atribui o Status do banco do status da funcção, 
             Console.WriteLine($"Funcionario {mudaStatus.Nome} foi desligado com sucesso ");
+            
         }
 
         public void ListarFuncionario()

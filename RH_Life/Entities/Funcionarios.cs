@@ -47,5 +47,11 @@ namespace RH_Life.Entities
 
         }
 
+        public void ValidandoCpf()
+        {
+        
+        
+        }
+
     }
 }

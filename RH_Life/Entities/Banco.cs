@@ -89,29 +89,15 @@ namespace RH_Life.Entities
             Console.WriteLine("|        Listando por sexo       |");
             Console.WriteLine("===================================");
             Console.WriteLine();
-            Console.WriteLine("Favor informe o sexo: ");
-            var sex = char.Parse(Console.ReadLine());
-            if (sex == 'm' || sex == 'M')
+            var sex = listRh.OrderBy(x => x.Sexo);
+            foreach (var item in sex)
             {
-                for (int i = 0; i < listRh.Count; i++)
-                {
-                    Console.WriteLine($"Nome funcionario: {listRh[i].Nome}");
-                    Console.WriteLine($"Sexo: {listRh[i].Sexo}");
-                    Console.WriteLine("===================================");
-                }
+                Console.WriteLine("===============");
+                Console.WriteLine(item.Nome);
+                Console.WriteLine(item.Salario);
+                Console.WriteLine(item.Sexo);
+                Console.WriteLine("===============");
             }
-            //if (sex == 'f' || sex == 'F')
-            //{
-            //    for (int i = 0; i < listRh.Count; i++)
-            //    {
-            //        Console.WriteLine($"Nome funcionario: {listRh[i].Nome}");
-            //        Console.WriteLine($"Sexo: {listRh[i].Sexo}");
-            //        Console.WriteLine("===================================");
-            //    }
-            //}
-
-
-
         }
 
         public void FuncMaisVelho()

@@ -35,7 +35,7 @@ namespace RH_Life.Entities
                 Console.WriteLine($"Salario com imposto: {percento.ToString("F2", CultureInfo.InvariantCulture)}");
                 Console.WriteLine("===================================");
                 Total += listRh[i].Salario;
-                TotalComImposto += listRh[i].Salario;
+                TotalComImposto += percento;
             }
             Console.WriteLine();
             Console.WriteLine("===================================");

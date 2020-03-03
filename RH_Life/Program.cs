@@ -15,7 +15,7 @@ namespace RH_Life
         {
             Banco banco = new Banco();
             escolha(banco);
-            while (Console.ReadLine() != "5")
+            while (Console.ReadLine() != "10")
             {
                 escolha(banco);
             }
@@ -31,9 +31,15 @@ namespace RH_Life
             Console.WriteLine("===========================");
             Console.WriteLine("1 - Cadastrar Funcionario:");
             Console.WriteLine("2 - Alterar Salário: ");
-            Console.WriteLine("3 - Desligar  Funcionario  ");
-            Console.WriteLine("4 - Emitir Folha de pagamento");
-            Console.WriteLine("5 - Sair");
+            Console.WriteLine("3 - Desligar  Funcionario:  ");
+            Console.WriteLine("4 - Emitir Folha de pagamento:");
+            Console.WriteLine("5 - Lista de funcionarios cadasrtrados:");
+            Console.WriteLine("6 - Pesquisar Funcionario por sexo:");
+            Console.WriteLine("7 - Pesquisar Funcionario mais velho:");
+            Console.WriteLine("8 - Pesquisar Funcionario mais novo:");
+            Console.WriteLine("9 - Pesquisar Funcionario por idade:");
+            Console.WriteLine("10- Pesquisar Funcionario por nacionalidade:");
+            Console.WriteLine("11 -Sair");
             Console.Write("Entre Com uma das Opções: ");
             int opcao = int.Parse(Console.ReadLine());
             switch (opcao)
@@ -43,18 +49,26 @@ namespace RH_Life
                     break;
                 case 2:
                     banco.AlteraSalario();
-                    
                     break;
                 case 3:
                     banco.DesligarFuncionario();
-                    
                     break;
                 case 4:
                     banco.FolhaDePagamento();
-                    
+                    break;
+                case 5:
+                    banco.ListarFuncionario();
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
                     break;
                 default:
-                    Environment.Exit(5);
+                    Environment.Exit(10);
                     break;
             }
         }

@@ -8,7 +8,7 @@ namespace RH_Life.Entities.Enums
 {
     public enum Status: int
     {
-        Trabalhando = 1,
-        Desligado = 2
+        Trabalhando = 0,
+        Desligado = 1
     }
 }

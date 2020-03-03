@@ -40,7 +40,7 @@ namespace RH_Life.Entities
             Nacionalidade = Console.ReadLine();
             Console.Write("Cargo: ");
             Cargo = Console.ReadLine();
-            Console.Write("Status 1 - Trabalhando / 2 - Desligado: ");
+            Console.Write("Status 0 - Trabalhando / 1 - Desligado: ");
             string Status = Console.ReadLine();
             Status status = (Status)Enum.Parse(typeof(Status), Status);
             Console.WriteLine("====================================");

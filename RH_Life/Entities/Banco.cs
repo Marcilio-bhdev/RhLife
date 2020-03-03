@@ -65,6 +65,42 @@ namespace RH_Life.Entities
 
         }
 
+        public void ListarFuncionario()
+        {
+            for (int i = 0; i < listRh.Count; i++)
+            {
+                Console.WriteLine("===================================");
+                Console.WriteLine("|        Lista Funcionario        |");
+                Console.WriteLine("===================================");
+                Console.WriteLine();
+                Console.WriteLine($"Nome funcionario: {listRh[i].Nome}");
+                Console.WriteLine($"Data de Nascimento: {listRh[i].Data_Nasc}");
+                Console.WriteLine($"CPF: {listRh[i].CPF}");
+                Console.WriteLine($"SEXO: {listRh[i].Sexo}");
+                Console.WriteLine($"Nascinalidade: {listRh[i].Nacionalidade}");
+                Console.WriteLine($"Salario: {listRh[i].Salario}");
+                Console.WriteLine($"Cargo: {listRh[i].Cargo}");
+                Console.WriteLine($"Status: {listRh[i].Status}");
+                Console.WriteLine("===================================");
+            }
+        }
+
+        public void FuncMaisVelho()
+        {
         
+        }
+        public void FuncMaisNovo()
+        {
+
+        }
+        public void FuncIdade()
+        {
+
+        }
+
+        public void FuncNascionalidade()
+        {
+
+        }
     }
 }

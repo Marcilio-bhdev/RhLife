@@ -68,7 +68,7 @@ namespace RH_Life.Entities
             Console.WriteLine("|        Desligando Empregado     |");
             Console.WriteLine("===================================");
             Console.WriteLine();
-            Console.WriteLine("Digitar o CPF do Empregado: ");
+            Console.Write("Digitar o CPF do Empregado: ");
             string CPFAntigo = Console.ReadLine();
             var mudaStatus= listRh.FirstOrDefault(x => CPFAntigo == x.CPF);
             Status status = (Status)Enum.Parse(typeof(Status), "Desligado"); // Usei o conversor do tipo Status para String
@@ -115,10 +115,10 @@ namespace RH_Life.Entities
         public void FuncMaisVelho()
         {
             Console.WriteLine("===================================");
-            Console.WriteLine("|      Funcionario Mais Velho     |");
+            Console.WriteLine("|      Funcionario Mais Novo     |");
             Console.WriteLine("===================================");
             Console.WriteLine();
-            var maisVelho = listRh.OrderByDescending(x => x.Data_Nasc).SingleOrDefault();
+            var maisVelho = listRh.OrderBy(x => x.Data_Nasc).FirstOrDefault();
             Console.WriteLine($"Nome funcionario: {maisVelho.Nome}");
             Console.WriteLine($"Data de Nascimento: {maisVelho.Data_Nasc}");
             Console.WriteLine("===================================");
@@ -126,10 +126,10 @@ namespace RH_Life.Entities
         public void FuncMaisNovo()
         {
             Console.WriteLine("===================================");
-            Console.WriteLine("|      Funcionario Mais Novo     |");
+            Console.WriteLine("|      Funcionario Mais Velho     |");
             Console.WriteLine("===================================");
             Console.WriteLine();
-            var MaisNovo = listRh.OrderBy(x => x.Data_Nasc).SingleOrDefault();
+            var MaisNovo = listRh.OrderByDescending(x => x.Data_Nasc).FirstOrDefault();
             Console.WriteLine($"Nome funcionario: {MaisNovo.Nome}");
             Console.WriteLine($"Data de Nascimento: {MaisNovo.Data_Nasc}");
             Console.WriteLine("===================================");

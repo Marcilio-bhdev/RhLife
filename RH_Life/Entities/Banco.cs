@@ -142,14 +142,12 @@ namespace RH_Life.Entities
             Console.WriteLine("===================================");
             Console.WriteLine();
             var idade = listRh.OrderBy(x => x.Data_Nasc);
-            
             foreach (var item in idade)
             {
                 Console.WriteLine("===================================");
-                Console.WriteLine($"Nome funcionario: {item.Nome}");
-                Console.WriteLine($"Idade Funcionario: {DateTime.Now.Year - item.Data_Nasc.Year}");
+                Console.WriteLine($"Nome: {item.Nome}");
+                Console.WriteLine($"Idade: {DateTime.Now.Year - item.Data_Nasc.Year}");
                 Console.WriteLine("===================================");
-
             }
             
         }
@@ -161,14 +159,12 @@ namespace RH_Life.Entities
             Console.WriteLine("===================================");
             Console.WriteLine();
             var nacao = listRh.OrderBy(x => x.Data_Nasc);
-
             foreach (var item in nacao)
             {
                 Console.WriteLine("===================================");
-                Console.WriteLine($"Nome funcionario: {item.Nome}");
-                Console.WriteLine($"Idade Funcionario: {item.Nacionalidade}");
+                Console.WriteLine($"Nome: {item.Nome}");
+                Console.WriteLine($"Nacionalidade: {item.Nacionalidade}");
                 Console.WriteLine("===================================");
-
             }
 
         }

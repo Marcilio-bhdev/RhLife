@@ -30,10 +30,25 @@ namespace RH_Life.Entities
             Nome = Console.ReadLine();
             Console.Write("Salario: ");
             Salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-            Console.Write("Data de Nascimento --/--/----: ");
+            Console.Write("Data de Nascimento ex.dd/mm/aaaa: ");
             Data_Nasc = DateTime.Parse(Console.ReadLine());
+            while (ValidandoDataNascimentos(Data_Nasc))
+            {
+                Console.WriteLine("Data com formato incorreto!!!");
+                Console.WriteLine("Favor ensira data correta:");
+                Data_Nasc = DateTime.Parse(Console.ReadLine());
+                ValidandoDataNascimentos(Data_Nasc);
+            }
             Console.Write("CPF: ");
             CPF = Console.ReadLine();
+            while (!ValidandoCpf(CPF))
+            {
+                Console.WriteLine("CPF Inválido");
+                Console.WriteLine("Digite Novamente");
+                CPF = Console.ReadLine();
+                ValidandoCpf(CPF);
+            }
+            
             Console.Write("Sexo M / F: ");
             Sexo = char.Parse(Console.ReadLine());
             Console.Write("Nascionalidade: ");
@@ -47,11 +62,114 @@ namespace RH_Life.Entities
 
         }
 
-        public void ValidandoCpf()
+        public bool ValidandoCpf(string CPF)
         {
-        
-        
+            int multiplicador1 = 10;
+            int multiplicador2 = 11;
+
+            string temCPF;
+            string Digito;
+            int Soma;
+            int Resto;
+
+            CPF = CPF.Trim();
+            CPF = CPF.Replace(".", "").Replace("-", "");
+
+            if (CPF.Length!=11)
+              return false;
+          
+
+            temCPF = CPF.Substring(0, 9);
+            Soma = 0;
+
+            for (int i = 0; i < 9; i++)
+            {
+                Soma += int.Parse(temCPF[i].ToString()) * (multiplicador1-i);
+            }
+
+            Resto = Soma % 11;
+
+            if (Resto < 2)
+            {
+                Resto = 0;
+            }
+            else 
+            {
+                Resto = 11 - Resto;
+            }
+
+            Digito = Resto.ToString();
+            temCPF = temCPF + Digito;
+
+            Soma = 0;
+
+            for (int i = 0; i < 10; i++)
+            {
+                Soma += int.Parse(temCPF[i].ToString()) * (multiplicador2-i);
+            }
+
+            Resto = Soma % 11;
+
+            if (Resto < 2)
+            {
+                Resto = 0;
+            }
+            else
+            {
+                Resto = 11 - Resto;
+            }
+
+            Digito = Digito + Resto.ToString();
+
+            return CPF.EndsWith(Digito);
+            
         }
+
+        public bool ValidandoDataNascimentos(DateTime Data_Nasc) 
+        {
+            
+            var convertido = DateTime.TryParseExact(Console.ReadLine(),
+                                "dd/MM/yyyy",
+                                CultureInfo.InvariantCulture,
+                                DateTimeStyles.None,
+                                out Data_Nasc);
+            return convertido;
+        }
+
+        //public static bool IsCnpj(string cnpj)
+        //{
+        //    int[] multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+        //    int[] multiplicador2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+        //    int soma;
+        //    int resto;
+        //    string digito;
+        //    string tempCnpj;
+        //    cnpj = cnpj.Trim();
+        //    cnpj = cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
+        //    if (cnpj.Length != 14)
+        //        return false;
+        //    tempCnpj = cnpj.Substring(0, 12);
+        //    soma = 0;
+        //    for (int i = 0; i < 12; i++)
+        //        soma += int.Parse(tempCnpj[i].ToString()) * multiplicador1[i];
+        //    resto = (soma % 11);
+        //    if (resto < 2)
+        //        resto = 0;
+        //    else
+        //        resto = 11 - resto;
+        //    digito = resto.ToString();
+        //    tempCnpj = tempCnpj + digito;
+        //    soma = 0;
+        //    for (int i = 0; i < 13; i++)
+        //        soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
+        //    resto = (soma % 11);
+        //    if (resto < 2)
+        //        resto = 0;
+        //    else
+        //        resto = 11 - resto;
+        //    digito = digito + resto.ToString();
+        //    return cnpj.EndsWith(digito);
+        //}
 
     }
 }

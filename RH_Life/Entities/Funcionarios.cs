@@ -23,7 +23,7 @@ namespace RH_Life.Entities
         public Funcionarios(List<Funcionarios> listRh)
         {
             Console.WriteLine("=============================");
-            Console.WriteLine("|  Cadastro de Funcionários |");
+            Console.WriteLine("|  Cadastro de Funcionário  |");
             Console.WriteLine("=============================");
             Console.WriteLine();
             Console.Write("Nome: ");
@@ -52,10 +52,39 @@ namespace RH_Life.Entities
                 Sexo = char.Parse(Console.ReadLine());
             } 
 
-            Console.Write("Nascionalidade: ");
+            Console.Write("Nacionalidade: ");
             Nacionalidade = Console.ReadLine();
+            bool teste = true;
+            List<char> numeros = new List<char>(){ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            while (teste)
+            {    /* usamos Lambda expression
+                 * .where para ele verificar dentro da
+                 * variaval Nacionalidade se tem Valor */
+                if (numeros.Where(x => Nacionalidade.Contains(x)).Any())
+                {
+                    Console.WriteLine("Entrada não Aceita");
+                    Console.Write("Digite Novamente: ");
+                    Nacionalidade = Console.ReadLine();
+                }
+                else if (Nacionalidade.Length >= 20)
+                {
+                    Console.WriteLine("Numero de caractere excedido");
+                    Console.Write("Digite Novamente: ");
+                    Nacionalidade = Console.ReadLine();
+                }
+                else
+                {
+                    teste = false;
+                }
+            }
             Console.Write("Cargo: ");
             Cargo = Console.ReadLine();
+            while (Cargo.Length >= 20)
+            {
+                Console.WriteLine("Numero de caractere extenso.");
+                Console.Write("Digite novamente: ");
+                Cargo = Console.ReadLine();
+            }
             Console.Write("Status 0 - Trabalhando / 1 - Desligado: ");
             string Status = Console.ReadLine();
             Status status = (Status)Enum.Parse(typeof(Status), Status);

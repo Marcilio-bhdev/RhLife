@@ -98,7 +98,7 @@ namespace RH_Life.Entities
                 Console.WriteLine($"CPF: {listRh[i].CPF}");
                 Console.WriteLine($"SEXO: {listRh[i].Sexo}");
                 Console.WriteLine($"Nascinalidade: {listRh[i].Nacionalidade}");
-                if (listRh[i].Status == "Desligado")
+                if (listRh[i].Status.ToString() == "Desligado")
                 {
                     Console.WriteLine("Salario: 0");
                 }
@@ -111,21 +111,24 @@ namespace RH_Life.Entities
                 Console.WriteLine("===================================");
             }
         }
-        public void FuncioSexo() 
+        public void TotalPorSexo() 
         {
+            double TotalM = 0;
+            double TotalF = 0;
             Console.WriteLine("===================================");
-            Console.WriteLine("|        Listando por sexo       |");
+            Console.WriteLine("| Listando Total Salário por sexo |");
             Console.WriteLine("===================================");
             Console.WriteLine();
-            var sex = listRh.OrderBy(x => x.Sexo);
-            foreach (var item in sex)
+            var sexF = listRh.Where(x => x.Sexo == 'F' || x.Sexo == 'f');
+            var sexM = listRh.Where(x => x.Sexo == 'M' || x.Sexo == 'm');
+            foreach (var item in sexF)
             {
-                Console.WriteLine("======================");
-                Console.WriteLine($"Nome: {item.Nome}");
-                Console.WriteLine($"Salario: {item.Salario.ToString("F2",CultureInfo.InvariantCulture)}");
-                Console.WriteLine($"Sexo: {item.Sexo}");
-                Console.WriteLine("======================");
+                TotalF += item.Salario;
+            } foreach (var item in sexM)
+            {
+                TotalM += item.Salario;
             }
+            Console.WriteLine($" O Sexo Masculino da sua empresa recebe R$: {TotalM.ToString("F2",CultureInfo.InvariantCulture)} e o Sexo Feminino da sua empresa recebe R$: {TotalF.ToString("F2", CultureInfo.InvariantCulture)}");
         }
 
         public void FuncMaisVelho()

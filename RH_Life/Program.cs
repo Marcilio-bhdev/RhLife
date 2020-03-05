@@ -33,7 +33,7 @@ namespace RH_Life
             Console.WriteLine("3 - Desligar  Funcionario:  ");
             Console.WriteLine("4 - Emitir Folha de pagamento:");
             Console.WriteLine("5 - Lista de funcionarios cadasrtrados:");
-            Console.WriteLine("6 - Buscar Funcionario por sexo:");
+            Console.WriteLine("6 - Lita Total de salario por sexo:");
             Console.WriteLine("7 - Buscar Funcionario mais Novo:");
             Console.WriteLine("8 - Buscar Funcionario mais Velho:");
             Console.WriteLine("9 - Buscar Funcionario por idade:");
@@ -60,7 +60,7 @@ namespace RH_Life
                     banco.ListarFuncionario();
                     break;
                 case 6:
-                    banco.FuncioSexo();
+                    banco.TotalPorSexo();
                     break;
                 case 7:
                     banco.FuncMaisNovo(); 

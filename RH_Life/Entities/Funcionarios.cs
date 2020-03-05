@@ -31,20 +31,14 @@ namespace RH_Life.Entities
             Console.Write("Salario: ");
             Salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             Console.Write("Data de Nascimento ex.dd/mm/aaaa: ");
-            Data_Nasc = DateTime.Parse(Console.ReadLine());
-            while (ValidandoDataNascimentos(Data_Nasc))
-            {
-                Console.WriteLine("Data com formato incorreto!!!");
-                Console.WriteLine("Favor ensira data correta:");
-                Data_Nasc = DateTime.Parse(Console.ReadLine());
-                ValidandoDataNascimentos(Data_Nasc);
-            }
-            Console.Write("CPF: ");
+            ValidandoDataNascimento();
+
+            Console.Write("CPF ex.999.999.999-99: ");
             CPF = Console.ReadLine();
             while (!ValidandoCpf(CPF))
             {
                 Console.WriteLine("CPF Inválido");
-                Console.WriteLine("Digite Novamente");
+                Console.Write("Digite Novamente: ");
                 CPF = Console.ReadLine();
                 ValidandoCpf(CPF);
             }
@@ -124,17 +118,30 @@ namespace RH_Life.Entities
             return CPF.EndsWith(Digito);
             
         }
-
-        public bool ValidandoDataNascimentos(DateTime Data_Nasc) 
+        public static bool ValidandoDataNascimento() 
         {
-            
-            var convertido = DateTime.TryParseExact(Console.ReadLine(),
-                                "dd/MM/yyyy",
-                                CultureInfo.InvariantCulture,
-                                DateTimeStyles.None,
-                                out Data_Nasc);
+            DateTime Data_Nasc;
+            var convertido = DateTime
+                .TryParseExact(Console.ReadLine(),
+                               "dd/MM/yyyy",
+                               CultureInfo.InvariantCulture,
+                               DateTimeStyles.None,
+                               out Data_Nasc);
+            while ((convertido == false))
+            {
+                Console.WriteLine("Data com formato incorreto!!!");
+                Console.Write("Favor ensira data correta: ");
+                convertido = DateTime
+                .TryParseExact(Console.ReadLine(),
+                               "dd/MM/yyyy",
+                               CultureInfo.InvariantCulture,
+                               DateTimeStyles.None,
+                               out Data_Nasc);
+            }
             return convertido;
         }
+
+
 
         //public static bool IsCnpj(string cnpj)
         //{

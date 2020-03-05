@@ -28,11 +28,10 @@ namespace RH_Life.Entities
             Console.WriteLine();
             Console.Write("Nome: ");
             Nome = Console.ReadLine();
-            Console.Write("Salario: ");
+            Console.Write("Salario R$: ");
             Salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             Console.Write("Data de Nascimento ex.dd/mm/aaaa: ");
             ValidandoDataNascimento();
-
             Console.Write("CPF ex.999.999.999-99: ");
             CPF = Console.ReadLine();
             while (!ValidandoCpf(CPF))
@@ -45,6 +44,14 @@ namespace RH_Life.Entities
             
             Console.Write("Sexo M / F: ");
             Sexo = char.Parse(Console.ReadLine());
+
+            while (!(Sexo == 'm' || Sexo == 'f' || Sexo == 'M' || Sexo == 'F'))
+            {   
+                Console.WriteLine("Favor inserir somente: m / f ou M / F");
+                Console.Write("Digite Novamente: ");
+                Sexo = char.Parse(Console.ReadLine());
+            } 
+
             Console.Write("Nascionalidade: ");
             Nacionalidade = Console.ReadLine();
             Console.Write("Cargo: ");
@@ -52,8 +59,15 @@ namespace RH_Life.Entities
             Console.Write("Status 0 - Trabalhando / 1 - Desligado: ");
             string Status = Console.ReadLine();
             Status status = (Status)Enum.Parse(typeof(Status), Status);
-            Console.WriteLine("====================================");
+            if (Status != "0"|| Status != "Trabalhando" || Status != "1" || Status != "Desligado")
+            {
+                Console.WriteLine("Favor Usar Somente as opções: 0 - Trabalhando / 1 - Desligado  ");
+                Console.Write("Digite Novamente: ");
+                Status = Console.ReadLine();
+                status = (Status)Enum.Parse(typeof(Status), Status);
 
+            }
+            Console.WriteLine("====================================");
         }
 
         public bool ValidandoCpf(string CPF)
@@ -121,7 +135,7 @@ namespace RH_Life.Entities
         public static bool ValidandoDataNascimento() 
         {
             DateTime Data_Nasc;
-            var convertido = DateTime
+               var convertido = DateTime
                 .TryParseExact(Console.ReadLine(),
                                "dd/MM/yyyy",
                                CultureInfo.InvariantCulture,
@@ -129,8 +143,19 @@ namespace RH_Life.Entities
                                out Data_Nasc);
             while ((convertido == false))
             {
-                Console.WriteLine("Data com formato incorreto!!!");
-                Console.Write("Favor ensira data correta: ");
+                Console.WriteLine("Formato incorreto!!!");
+                Console.Write("Favor insira data correta: ");
+                convertido = DateTime
+                .TryParseExact(Console.ReadLine(),
+                               "dd/MM/yyyy",
+                               CultureInfo.InvariantCulture,
+                               DateTimeStyles.None,
+                               out Data_Nasc);
+            }
+            if (Data_Nasc > DateTime.Now)
+            {
+                Console.WriteLine("Data de Nascimento inválida!!!");
+                Console.Write("Favor insira data correta: ");
                 convertido = DateTime
                 .TryParseExact(Console.ReadLine(),
                                "dd/MM/yyyy",
@@ -140,43 +165,11 @@ namespace RH_Life.Entities
             }
             return convertido;
         }
+        
 
 
 
-        //public static bool IsCnpj(string cnpj)
-        //{
-        //    int[] multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-        //    int[] multiplicador2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-        //    int soma;
-        //    int resto;
-        //    string digito;
-        //    string tempCnpj;
-        //    cnpj = cnpj.Trim();
-        //    cnpj = cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
-        //    if (cnpj.Length != 14)
-        //        return false;
-        //    tempCnpj = cnpj.Substring(0, 12);
-        //    soma = 0;
-        //    for (int i = 0; i < 12; i++)
-        //        soma += int.Parse(tempCnpj[i].ToString()) * multiplicador1[i];
-        //    resto = (soma % 11);
-        //    if (resto < 2)
-        //        resto = 0;
-        //    else
-        //        resto = 11 - resto;
-        //    digito = resto.ToString();
-        //    tempCnpj = tempCnpj + digito;
-        //    soma = 0;
-        //    for (int i = 0; i < 13; i++)
-        //        soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
-        //    resto = (soma % 11);
-        //    if (resto < 2)
-        //        resto = 0;
-        //    else
-        //        resto = 11 - resto;
-        //    digito = digito + resto.ToString();
-        //    return cnpj.EndsWith(digito);
-        //}
+        
 
     }
 }

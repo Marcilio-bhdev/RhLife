@@ -33,11 +33,11 @@ namespace RH_Life
             Console.WriteLine("3 - Desligar  Funcionario:  ");
             Console.WriteLine("4 - Emitir Folha de pagamento:");
             Console.WriteLine("5 - Lista de funcionarios cadasrtrados:");
-            Console.WriteLine("6 - Pesquisar Funcionario por sexo:");
-            Console.WriteLine("7 - Pesquisar Funcionario mais Novo:");
-            Console.WriteLine("8 - Pesquisar Funcionario mais Velho:");
-            Console.WriteLine("9 - Pesquisar Funcionario por idade:");
-            Console.WriteLine("10- Pesquisar Funcionario por nacionalidade:");
+            Console.WriteLine("6 - Buscar Funcionario por sexo:");
+            Console.WriteLine("7 - Buscar Funcionario mais Novo:");
+            Console.WriteLine("8 - Buscar Funcionario mais Velho:");
+            Console.WriteLine("9 - Buscar Funcionario por idade:");
+            Console.WriteLine("10- Buscar Funcionario por nacionalidade:");
             Console.WriteLine("11 -Sair");
             Console.Write("Entre Com uma das Opções: ");
             int opcao = int.Parse(Console.ReadLine());

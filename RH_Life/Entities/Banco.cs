@@ -98,7 +98,14 @@ namespace RH_Life.Entities
                 Console.WriteLine($"CPF: {listRh[i].CPF}");
                 Console.WriteLine($"SEXO: {listRh[i].Sexo}");
                 Console.WriteLine($"Nascinalidade: {listRh[i].Nacionalidade}");
-                Console.WriteLine($"Salario: {listRh[i].Salario.ToString("F2",CultureInfo.InvariantCulture)}");
+                if (listRh[i].Status == "Desligado")
+                {
+                    Console.WriteLine("Salario: 0");
+                }
+                else
+                {
+                    Console.WriteLine($"Salario: {listRh[i].Salario.ToString("F2",CultureInfo.InvariantCulture)}");
+                }
                 Console.WriteLine($"Cargo: {listRh[i].Cargo}");
                 Console.WriteLine($"Status: {listRh[i].Status}");
                 Console.WriteLine("===================================");

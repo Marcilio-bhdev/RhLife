@@ -19,7 +19,6 @@ namespace RH_Life
             {
                 escolha(banco);
             }
-            
         }
 
         public static void escolha(Banco banco)
@@ -46,146 +45,53 @@ namespace RH_Life
                 Console.WriteLine();
                 Console.Write("Entre Com uma das Opções: ");
                 opcao = int.Parse(Console.ReadLine());
+            while(opcao > 11)
+            {
+                Console.WriteLine("Favor digitar somente os itens do menu");
+                Console.Write("Entre Com uma das Opções: ");
+                opcao = int.Parse(Console.ReadLine());
+            }
                 switch (opcao)
                 {
                     case 1:
                         Console.Clear();
                         banco.AddFuncionario();
-                        break;
+                       break;
                     case 2:
-                        if (opcao == 1)
-                        {
                             Console.Clear();
                             banco.AlteraSalario();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("===============================");
-                            Console.WriteLine("|    Não seja espertinho      |");
-                            Console.WriteLine("| Inicie o sistema na opção 1 |");
-                            Console.WriteLine("===============================");
-                        }
                         break;
                     case 3:
-                        if (opcao == 1)
-                        {
-                            Console.Clear();
+                           Console.Clear();
                             banco.DesligarFuncionario();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("===============================");
-                            Console.WriteLine("|    Não seja espertinho      |");
-                            Console.WriteLine("| Inicie o sistema na opção 1 |");
-                            Console.WriteLine("===============================");
-                        }
                         break;
                     case 4:
-                        if (opcao == 1)
-                        {
                             Console.Clear();
                             banco.FolhaDePagamento();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("===============================");
-                            Console.WriteLine("|    Não seja espertinho      |");
-                            Console.WriteLine("| Inicie o sistema na opção 1 |");
-                            Console.WriteLine("===============================");
-                        }
                         break;
                     case 5:
-                        if (opcao == 1)
-                        {
                             Console.Clear();
                             banco.ListarFuncionario();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("===============================");
-                            Console.WriteLine("|    Não seja espertinho      |");
-                            Console.WriteLine("| Inicie o sistema na opção 1 |");
-                            Console.WriteLine("===============================");
-                        }
                         break;
                     case 6:
-                        if (opcao == 1)
-                        {
                             Console.Clear();
                             banco.TotalPorSexo();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("===============================");
-                            Console.WriteLine("|    Não seja espertinho      |");
-                            Console.WriteLine("| Inicie o sistema na opção 1 |");
-                            Console.WriteLine("===============================");
-                        }
                         break;
                     case 7:
-                        if (opcao == 1)
-                        {
-                            Console.Clear();
+                          Console.Clear();
                             banco.FuncMaisNovo();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("===============================");
-                            Console.WriteLine("|    Não seja espertinho      |");
-                            Console.WriteLine("| Inicie o sistema na opção 1 |");
-                            Console.WriteLine("===============================");
-                        }
                         break;
                     case 8:
-                        if (opcao == 1)
-                        {
-                            Console.Clear();
+                           Console.Clear();
                             banco.FuncMaisVelho();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("===============================");
-                            Console.WriteLine("|    Não seja espertinho      |");
-                            Console.WriteLine("| Inicie o sistema na opção 1 |");
-                            Console.WriteLine("===============================");
-                        }
                         break;
                     case 9:
-                        if (opcao == 1)
-                        {
                             Console.Clear();
                             banco.FuncIdade();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("===============================");
-                            Console.WriteLine("|    Não seja espertinho      |");
-                            Console.WriteLine("| Inicie o sistema na opção 1 |");
-                            Console.WriteLine("===============================");
-                        }
                         break;
                     case 10:
-                        if (opcao == 1)
-                        {
-                            Console.Clear();
-                            banco.FuncNascionalidade();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("===============================");
-                            Console.WriteLine("|    Não seja espertinho      |");
-                            Console.WriteLine("| Inicie o sistema na opção 1 |");
-                            Console.WriteLine("===============================");
-                        }
+                           Console.Clear();
+                    banco.FuncNascionalidade();
                         break;
                     default:
                         Environment.Exit(11);
@@ -194,3 +100,9 @@ namespace RH_Life
         }
     }
 }
+
+//Console.Clear();
+//Console.WriteLine("===============================");
+//Console.WriteLine("|    Não seja espertinho      |");
+//Console.WriteLine("| Inicie o sistema na opção 1 |");
+//Console.WriteLine("===============================");

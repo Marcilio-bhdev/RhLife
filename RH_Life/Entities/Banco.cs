@@ -19,12 +19,11 @@ namespace RH_Life.Entities
 
         public void FolhaDePagamento()
         {
-            double Total = 0;
-            double TotalComImposto = 0;
+            double total = 0;
+            double totalComImposto = 0;
             for (int i = 0; i < listRh.Count; i++)
             {
                 double percento = ((listRh[i].Salario * 0.55)+listRh[i].Salario);
-                
                 Console.WriteLine("===================================");
                 Console.WriteLine("|        Folha de Pagamento       |");
                 Console.WriteLine("===================================");
@@ -34,15 +33,17 @@ namespace RH_Life.Entities
                 Console.WriteLine($"Salario sem imposto: {listRh[i].Salario.ToString("F2", CultureInfo.InvariantCulture)}");
                 Console.WriteLine($"Salario com imposto: {percento.ToString("F2", CultureInfo.InvariantCulture)}");
                 Console.WriteLine("===================================");
-                Total += listRh[i].Salario;
-                TotalComImposto += percento;
+                total += listRh[i].Salario;
+                totalComImposto += percento;
             }
+            Console.WriteLine();
+            Console.WriteLine("=========================================");
             Console.WriteLine();
             Console.WriteLine("===================================");
             Console.WriteLine("|     Total com e sem imposto     |");
             Console.WriteLine("===================================");
-            Console.WriteLine($"Total sem imposto: {Total.ToString("F2",CultureInfo.InvariantCulture)}");
-            Console.WriteLine($"Total com Imposto: {TotalComImposto.ToString("F2", CultureInfo.InvariantCulture)}");
+            Console.WriteLine($"Total sem imposto: {total.ToString("F2",CultureInfo.InvariantCulture)}");
+            Console.WriteLine($"Total com Imposto: {totalComImposto.ToString("F2", CultureInfo.InvariantCulture)}");
             Console.WriteLine("===================================");
 
         }
@@ -56,10 +57,9 @@ namespace RH_Life.Entities
             Console.Write("Digitar o CPF do Empregado: ");
             string CPFAntigo = Console.ReadLine();
             var mudaSalario = listRh.FirstOrDefault(x => CPFAntigo == x.CPF);
-            
             while (mudaSalario.Status != 0 || mudaSalario.Status == Status.Desligado)
             {
-                Console.WriteLine("funcionários desligados não recebem salário!!! ");
+                Console.WriteLine("funcionários desligados não recebem alteração de salário!!! ");
                 Console.Write("Digite outro CPF: ");
                 CPFAntigo = Console.ReadLine();
                 mudaSalario = listRh.FirstOrDefault(x => CPFAntigo == x.CPF);
@@ -111,10 +111,11 @@ namespace RH_Life.Entities
                 Console.WriteLine("===================================");
             }
         }
+
         public void TotalPorSexo() 
         {
-            double TotalM = 0;
-            double TotalF = 0;
+            double totalM = 0;
+            double totalF = 0;
             Console.WriteLine("===================================");
             Console.WriteLine("| Listando Total Salário por sexo |");
             Console.WriteLine("===================================");
@@ -123,12 +124,12 @@ namespace RH_Life.Entities
             var sexM = listRh.Where(x => x.Sexo == 'M' || x.Sexo == 'm');
             foreach (var item in sexF)
             {
-                TotalF += item.Salario;
+                totalF += item.Salario;
             } foreach (var item in sexM)
             {
-                TotalM += item.Salario;
+                totalM += item.Salario;
             }
-            Console.WriteLine($" O Sexo Masculino da sua empresa recebe R$: {TotalM.ToString("F2",CultureInfo.InvariantCulture)} e o Sexo Feminino da sua empresa recebe R$: {TotalF.ToString("F2", CultureInfo.InvariantCulture)}");
+            Console.WriteLine($" O Sexo Masculino da sua empresa recebe R$: {totalM.ToString("F2",CultureInfo.InvariantCulture)} e o Sexo Feminino da sua empresa recebe R$: {totalF.ToString("F2", CultureInfo.InvariantCulture)}");
         }
 
         public void FuncMaisVelho()
@@ -142,18 +143,19 @@ namespace RH_Life.Entities
             Console.WriteLine($"Data de Nascimento: {maisVelho.Data_Nasc}");
             Console.WriteLine("===================================");
         }
+
         public void FuncMaisNovo()
         {
             Console.WriteLine("===================================");
             Console.WriteLine("|      Funcionario Mais Velho     |");
             Console.WriteLine("===================================");
             Console.WriteLine();
-            var MaisNovo = listRh.OrderByDescending(x => x.Data_Nasc).FirstOrDefault();
-            Console.WriteLine($"Nome: {MaisNovo.Nome}");
-            Console.WriteLine($"Data de Nascimento: {MaisNovo.Data_Nasc}");
+            var maisNovo = listRh.OrderByDescending(x => x.Data_Nasc).FirstOrDefault();
+            Console.WriteLine($"Nome: {maisNovo.Nome}");
+            Console.WriteLine($"Data de Nascimento: {maisNovo.Data_Nasc}");
             Console.WriteLine("===================================");
-
         }
+
         public void FuncIdade()
         {
             Console.WriteLine("===================================");
@@ -165,7 +167,7 @@ namespace RH_Life.Entities
             {
                 Console.WriteLine("===================================");
                 Console.WriteLine($"Nome: {item.Nome}");
-                Console.WriteLine($"Idade: {DateTime.Now.Year - item.Data_Nasc.Year} anos");
+                Console.WriteLine($"Idade: {DateTime.Now.Year - item.Data_Nasc.Year} anos|");
                 Console.WriteLine("===================================");
             }
             

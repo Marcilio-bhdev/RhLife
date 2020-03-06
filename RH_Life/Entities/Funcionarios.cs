@@ -28,6 +28,28 @@ namespace RH_Life.Entities
             Console.WriteLine();
             Console.Write("Nome: ");
             Nome = Console.ReadLine();
+            bool aprovado = true;
+            List<char> numerais = new List<char>() { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            while (aprovado)
+            {
+                if (numerais.Where(x => Nome.Contains(x)).Any())
+                {
+                    Console.WriteLine("Entrada incorreta");
+                    Console.Write("Digite novamente: ");
+                    Nome = Console.ReadLine();
+                }
+                else if (Nome.Length > 50)
+                {
+                    Console.WriteLine("Numero de caractere excedido");
+                    Console.Write("Digite Novamente: ");
+                    Nome = Console.ReadLine();
+                }
+                else 
+                {
+                    aprovado = false;
+                }
+            }
+
             Console.Write("Salario R$: ");
             Salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             Console.Write("Data de Nascimento ex.dd/mm/aaaa: ");
@@ -41,7 +63,6 @@ namespace RH_Life.Entities
                 CPF = Console.ReadLine();
                 ValidandoCpf(CPF);
             }
-            
             Console.Write("Sexo M / F: ");
             Sexo = char.Parse(Console.ReadLine());
 
@@ -51,13 +72,12 @@ namespace RH_Life.Entities
                 Console.Write("Digite Novamente: ");
                 Sexo = char.Parse(Console.ReadLine());
             } 
-
             Console.Write("Nacionalidade: ");
             Nacionalidade = Console.ReadLine();
             bool teste = true;
             List<char> numeros = new List<char>(){ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             while (teste)
-            {    /* usamos Lambda expression
+            {    /* usei Lambda expression
                  * .where para ele verificar dentro da
                  * variaval Nacionalidade se tem Valor */
                 if (numeros.Where(x => Nacionalidade.Contains(x)).Any())
@@ -88,13 +108,12 @@ namespace RH_Life.Entities
             Console.Write("Status 0 - Trabalhando / 1 - Desligado: ");
             string Status = Console.ReadLine();
             Status status = (Status)Enum.Parse(typeof(Status), Status);
-            if (Status != "0"|| Status != "Trabalhando" || Status != "1" || Status != "Desligado")
+            if (Status != "0" || Status != "Trabalhando" || Status != "1" || Status != "Desligado")
             {
                 Console.WriteLine("Favor Usar Somente as opções: 0 - Trabalhando / 1 - Desligado  ");
                 Console.Write("Digite Novamente: ");
                 Status = Console.ReadLine();
                 status = (Status)Enum.Parse(typeof(Status), Status);
-
             }
             Console.WriteLine("====================================");
         }
@@ -105,62 +124,50 @@ namespace RH_Life.Entities
             int multiplicador2 = 11;
 
             string temCPF;
-            string Digito;
-            int Soma;
-            int Resto;
+            string digito;
+            int soma;
+            int resto;
 
             CPF = CPF.Trim();
             CPF = CPF.Replace(".", "").Replace("-", "");
-
             if (CPF.Length!=11)
               return false;
-          
-
             temCPF = CPF.Substring(0, 9);
-            Soma = 0;
-
+            soma = 0;
             for (int i = 0; i < 9; i++)
             {
-                Soma += int.Parse(temCPF[i].ToString()) * (multiplicador1-i);
+                soma += int.Parse(temCPF[i].ToString()) * (multiplicador1-i);
             }
-
-            Resto = Soma % 11;
-
-            if (Resto < 2)
+            resto = soma % 11;
+            if (resto < 2)
             {
-                Resto = 0;
+                resto = 0;
             }
             else 
             {
-                Resto = 11 - Resto;
+                resto = 11 - resto;
             }
-
-            Digito = Resto.ToString();
-            temCPF = temCPF + Digito;
-
-            Soma = 0;
-
+            digito = resto.ToString();
+            temCPF = temCPF + digito;
+            soma = 0;
             for (int i = 0; i < 10; i++)
             {
-                Soma += int.Parse(temCPF[i].ToString()) * (multiplicador2-i);
+                soma += int.Parse(temCPF[i].ToString()) * (multiplicador2-i);
             }
-
-            Resto = Soma % 11;
-
-            if (Resto < 2)
+            resto = soma % 11;
+            if (resto < 2)
             {
-                Resto = 0;
+                resto = 0;
             }
             else
             {
-                Resto = 11 - Resto;
+                resto = 11 - resto;
             }
+            digito = digito + resto.ToString();
+            return CPF.EndsWith(digito);
 
-            Digito = Digito + Resto.ToString();
-
-            return CPF.EndsWith(Digito);
-            
         }
+
         public static bool ValidandoDataNascimento() 
         {
             DateTime Data_Nasc;
@@ -183,7 +190,7 @@ namespace RH_Life.Entities
             }
             if (Data_Nasc > DateTime.Now)
             {
-                Console.WriteLine("Data de Nascimento inválida!!!");
+                Console.WriteLine("Data inválida!!!");
                 Console.Write("Favor insira data correta: ");
                 convertido = DateTime
                 .TryParseExact(Console.ReadLine(),
@@ -194,11 +201,5 @@ namespace RH_Life.Entities
             }
             return convertido;
         }
-        
-
-
-
-        
-
     }
 }

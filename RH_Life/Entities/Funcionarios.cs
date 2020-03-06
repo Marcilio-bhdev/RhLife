@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Globalization;
 using RH_Life.Entities.Enums;
+using RH_Life.Entities.Controller;
 
 namespace RH_Life.Entities
 {
@@ -20,6 +21,8 @@ namespace RH_Life.Entities
 
         public Funcionarios(List<Funcionarios> listRh)
         {
+            Metodos metodos = new Metodos();
+            
             Console.WriteLine("=============================");
             Console.WriteLine("|  Cadastro de Funcionário  |");
             Console.WriteLine("=============================");
@@ -50,19 +53,19 @@ namespace RH_Life.Entities
             Console.Write("Salario R$: ");
             salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             Console.Write("Data de Nascimento ex.dd/mm/aaaa: ");
-            ValidandoDataNascimento();
+            data_nasc = metodos.ValidandoDataNascimento(listRh);
             Console.Write("CPF ex.999.999.999-99: ");
             cpf = Console.ReadLine();
-            bool validador = !ValidandoCpf(cpf) || ConfereCpfDuplicado(listRh, cpf); // Criei uma variável booleana recebendo os 2 metodos
+            bool validador = !metodos.ValidandoCpf(cpf) || metodos.ConfereCpfDuplicado(listRh, cpf); // Criei uma variável booleana recebendo os 2 metodos
             while (validador)// o while vai avaliar os metodos 
             {
-                if (!ValidandoCpf(cpf))
+                if (!metodos.ValidandoCpf(cpf))
                 {
                     Console.WriteLine("CPF Inválido");
                     Console.Write("Digite Novamente: ");
                     cpf = Console.ReadLine();
                 }
-                else if (ConfereCpfDuplicado(listRh, cpf))
+                else if (metodos.ConfereCpfDuplicado(listRh, cpf))
                 {
                     Console.WriteLine("CPF já consta no banco de dados!!!!");
                     Console.Write("Digite Novamente: ");
@@ -128,99 +131,6 @@ namespace RH_Life.Entities
             Console.WriteLine("====================================");
         }
 
-        public bool ValidandoCpf(string CPF)
-        {
-            int multiplicador1 = 10;
-            int multiplicador2 = 11;
-
-            string temCPF;
-            string digito;
-            int soma;
-            int resto;
-
-            CPF = CPF.Trim();
-            CPF = CPF.Replace(".", "").Replace("-", "");
-            if (CPF.Length != 11)
-                return false;
-            temCPF = CPF.Substring(0, 9);
-            soma = 0;
-            for (int i = 0; i < 9; i++)
-            {
-                soma += int.Parse(temCPF[i].ToString()) * (multiplicador1 - i);
-            }
-            resto = soma % 11;
-            if (resto < 2)
-            {
-                resto = 0;
-            }
-            else
-            {
-                resto = 11 - resto;
-            }
-            digito = resto.ToString();
-            temCPF = temCPF + digito;
-            soma = 0;
-            for (int i = 0; i < 10; i++)
-            {
-                soma += int.Parse(temCPF[i].ToString()) * (multiplicador2 - i);
-            }
-            resto = soma % 11;
-            if (resto < 2)
-            {
-                resto = 0;
-            }
-            else
-            {
-                resto = 11 - resto;
-            }
-            digito = digito + resto.ToString();
-            return CPF.EndsWith(digito);
-        }
-
-        public bool ConfereCpfDuplicado(List<Funcionarios> listRh,string CPF)
-        {
-            for (int i = 0; i < listRh.Count; i++)
-            {
-                if (listRh[i].cpf == CPF)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static bool ValidandoDataNascimento() 
-        {
-            DateTime Data_Nasc;
-               var convertido = DateTime
-                .TryParseExact(Console.ReadLine(),
-                               "dd/MM/yyyy",
-                               CultureInfo.InvariantCulture,
-                               DateTimeStyles.None,
-                               out Data_Nasc);
-            while ((convertido == false))
-            {
-                Console.WriteLine("Formato incorreto!!!");
-                Console.Write("Favor insira data correta: ");
-                convertido = DateTime
-                .TryParseExact(Console.ReadLine(),
-                               "dd/MM/yyyy",
-                               CultureInfo.InvariantCulture,
-                               DateTimeStyles.None,
-                               out Data_Nasc);
-            }
-            if (Data_Nasc > DateTime.Now)
-            {
-                Console.WriteLine("Data inválida!!!");
-                Console.Write("Favor insira data correta: ");
-                convertido = DateTime
-                .TryParseExact(Console.ReadLine(),
-                               "dd/MM/yyyy",
-                               CultureInfo.InvariantCulture,
-                               DateTimeStyles.None,
-                               out Data_Nasc);
-            }
-            return convertido;
-        }
+        
     }
 }

@@ -10,7 +10,6 @@ namespace RH_Life.Entities
 {
     public class Banco
     {
-
         public List<Funcionarios> listRh = new List<Funcionarios>();
         public void AddFuncionario() 
         {
@@ -48,7 +47,7 @@ namespace RH_Life.Entities
 
         }
 
-        public void AlteraSalario()
+        public void AlterarSalario()
         {
             Console.WriteLine("===================================");
             Console.WriteLine("|        Alterando Salario        |");
@@ -83,111 +82,6 @@ namespace RH_Life.Entities
             mudaStatus.status = status;//atribui o Status do banco do status da funcção, 
             Console.WriteLine($"Funcionario {mudaStatus.nome} foi desligado com sucesso ");
             
-        }
-
-        public void ListarFuncionario()
-        {
-            for (int i = 0; i < listRh.Count; i++)
-            {
-                Console.WriteLine("===================================");
-                Console.WriteLine("|        Lista Funcionario        |");
-                Console.WriteLine("===================================");
-                Console.WriteLine();
-                Console.WriteLine($"Nome funcionario: {listRh[i].nome}");
-                Console.WriteLine($"Data de Nascimento: {listRh[i].data_nasc}");
-                Console.WriteLine($"CPF: {listRh[i].cpf}");
-                Console.WriteLine($"SEXO: {listRh[i].sexo}");
-                Console.WriteLine($"Nascinalidade: {listRh[i].nacionalidade}");
-                if (listRh[i].status.ToString() == "Desligado")
-                {
-                    Console.WriteLine("Salario: 0");
-                }
-                else
-                {
-                    Console.WriteLine($"Salario: {listRh[i].salario.ToString("F2",CultureInfo.InvariantCulture)}");
-                }
-                Console.WriteLine($"Cargo: {listRh[i].cargo}");
-                Console.WriteLine($"Status: {listRh[i].status}");
-                Console.WriteLine("===================================");
-            }
-        }
-
-        public void ListaPorSexo() 
-        {
-            double totalM = 0;
-            double totalF = 0;
-            Console.WriteLine("===================================");
-            Console.WriteLine("| Listando Total Salário por sexo |");
-            Console.WriteLine("===================================");
-            Console.WriteLine();
-            var sexF = listRh.Where(x => x.sexo == 'F' || x.sexo == 'f');
-            var sexM = listRh.Where(x => x.sexo == 'M' || x.sexo == 'm');
-            foreach (var item in sexF)
-            {
-                totalF += item.salario;
-            } foreach (var item in sexM)
-            {
-                totalM += item.salario;
-            }
-            Console.WriteLine($" O Sexo Masculino da sua empresa recebe R$: {totalM.ToString("F2",CultureInfo.InvariantCulture)} e o Sexo Feminino da sua empresa recebe R$: {totalF.ToString("F2", CultureInfo.InvariantCulture)}");
-        }
-
-        public void ListarMaisVelho()
-        {
-            Console.WriteLine("===================================");
-            Console.WriteLine("|      Funcionario Mais Novo     |");
-            Console.WriteLine("===================================");
-            Console.WriteLine();
-            var maisVelho = listRh.OrderBy(x => x.data_nasc).FirstOrDefault();
-            Console.WriteLine($"Nome: {maisVelho.nome}");
-            Console.WriteLine($"Data de Nascimento: {maisVelho.data_nasc}");
-            Console.WriteLine("===================================");
-        }
-
-        public void ListarMaisNovo()
-        {
-            Console.WriteLine("===================================");
-            Console.WriteLine("|      Funcionario Mais Velho     |");
-            Console.WriteLine("===================================");
-            Console.WriteLine();
-            var maisNovo = listRh.OrderByDescending(x => x.data_nasc).FirstOrDefault();
-            Console.WriteLine($"Nome: {maisNovo.nome}");
-            Console.WriteLine($"Data de Nascimento: {maisNovo.data_nasc}");
-            Console.WriteLine("===================================");
-        }
-
-        public void ListarPorIdade()
-        {
-            Console.WriteLine("===================================");
-            Console.WriteLine("|      Funcionario Por Idade     |");
-            Console.WriteLine("===================================");
-            Console.WriteLine();
-            var idade = listRh.OrderBy(x => x.data_nasc);
-            foreach (var item in idade)
-            {
-                Console.WriteLine("===================================");
-                Console.WriteLine($"Nome: {item.nome}");
-                Console.WriteLine($"Idade: {DateTime.Now.Year - item.data_nasc.Year} anos|");
-                Console.WriteLine("===================================");
-            }
-            
-        }
-
-        public void ListarPorNascionalidade()
-        {
-            Console.WriteLine("===================================");
-            Console.WriteLine("|  Funcionario Por Nacionalidade  |");
-            Console.WriteLine("===================================");
-            Console.WriteLine();
-            var nacao = listRh.OrderBy(x => x.data_nasc);
-            foreach (var item in nacao)
-            {
-                Console.WriteLine("===================================");
-                Console.WriteLine($"Nome: {item.nome}");
-                Console.WriteLine($"Nacionalidade: {item.nacionalidade}");
-                Console.WriteLine("===================================");
-            }
-
         }
     }
 }

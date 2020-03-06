@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Banco.cs" />
+    <Compile Include="Controller\Metodos.cs" />
     <Compile Include="Entities\Enums\Status.cs" />
     <Compile Include="Entities\Funcionarios.cs" />
     <Compile Include="Program.cs" />

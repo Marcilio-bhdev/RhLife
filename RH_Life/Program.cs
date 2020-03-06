@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RH_Life.Entities;
+using RH_Life.Entities.Controller;
 using RH_Life.Entities.Enums;
 
 
@@ -19,10 +20,11 @@ namespace RH_Life
             {
                 Menu(banco);
             }
+            
         }
-
         public static void Menu(Banco banco)
         {
+            Metodos metodos = new Metodos();
             int opcao = 0;
                 Console.Clear();
                 Console.WriteLine("|==========================================|");
@@ -50,16 +52,15 @@ namespace RH_Life
                 Console.Write("Entre Com uma das Opções: ");
                 opcao = int.Parse(Console.ReadLine());
             }
-          
                 switch (opcao)
                 {
                     case 1:
                             Console.Clear();
-                            banco.AddFuncionario();
+                        banco.AddFuncionario();
                        break;
                     case 2:
                             Console.Clear();
-                            banco.AlteraSalario();
+                            banco.AlterarSalario();
                         break;
                     case 3:
                            Console.Clear();
@@ -71,27 +72,27 @@ namespace RH_Life
                         break;
                     case 5:
                             Console.Clear();
-                            banco.ListarFuncionario();
+                            metodos.ListarFuncionario(banco);
                         break;
                     case 6:
                             Console.Clear();
-                            banco.ListaPorSexo();
+                            metodos.ListaPorSexo(banco);
                         break;
                     case 7:
                           Console.Clear();
-                            banco.ListarMaisVelho();
+                          metodos.ListarMaisVelho(banco);
                         break;
                     case 8:
                            Console.Clear();
-                            banco.ListarMaisNovo();
+                           metodos.ListarMaisNovo(banco);
                         break;
                     case 9:
                             Console.Clear();
-                            banco.ListarPorIdade();
+                            metodos.ListarPorIdade(banco);
                         break;
                     case 10:
                            Console.Clear();
-                           banco.ListarPorNascionalidade();
+                            metodos.ListarPorNascionalidade(banco);
                         break;
                     default:
                            Environment.Exit(11);

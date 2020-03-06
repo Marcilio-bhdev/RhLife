@@ -14,17 +14,16 @@ namespace RH_Life
         public static void Main(string[] args)
         {
             Banco banco = new Banco();
-            escolha(banco);
+            Menu(banco);
             while (Console.ReadLine() != "10")
             {
-                escolha(banco);
+                Menu(banco);
             }
         }
 
-        public static void escolha(Banco banco)
+        public static void Menu(Banco banco)
         {
             int opcao = 0;
-
                 Console.Clear();
                 Console.WriteLine("|==========================================|");
                 Console.WriteLine("|             Sistema RHLife               |");
@@ -51,11 +50,12 @@ namespace RH_Life
                 Console.Write("Entre Com uma das Opções: ");
                 opcao = int.Parse(Console.ReadLine());
             }
+          
                 switch (opcao)
                 {
                     case 1:
-                        Console.Clear();
-                        banco.AddFuncionario();
+                            Console.Clear();
+                            banco.AddFuncionario();
                        break;
                     case 2:
                             Console.Clear();
@@ -75,34 +75,29 @@ namespace RH_Life
                         break;
                     case 6:
                             Console.Clear();
-                            banco.TotalPorSexo();
+                            banco.ListaPorSexo();
                         break;
                     case 7:
                           Console.Clear();
-                            banco.FuncMaisNovo();
+                            banco.ListarMaisVelho();
                         break;
                     case 8:
                            Console.Clear();
-                            banco.FuncMaisVelho();
+                            banco.ListarMaisNovo();
                         break;
                     case 9:
                             Console.Clear();
-                            banco.FuncIdade();
+                            banco.ListarPorIdade();
                         break;
                     case 10:
                            Console.Clear();
-                    banco.FuncNascionalidade();
+                           banco.ListarPorNascionalidade();
                         break;
                     default:
-                        Environment.Exit(11);
+                           Environment.Exit(11);
                         break;
                 }
         }
     }
 }
 
-//Console.Clear();
-//Console.WriteLine("===============================");
-//Console.WriteLine("|    Não seja espertinho      |");
-//Console.WriteLine("| Inicie o sistema na opção 1 |");
-//Console.WriteLine("===============================");

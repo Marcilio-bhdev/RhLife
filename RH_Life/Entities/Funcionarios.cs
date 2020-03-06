@@ -9,16 +9,14 @@ namespace RH_Life.Entities
 {
     public class Funcionarios
     {
-        public string Nome { get; set; }
-        public DateTime Data_Nasc { get; set; }
-        public string CPF { get; set; }
-        public char Sexo { get; set; }
-        public string Nacionalidade { get; set; }
-        public double Salario { get; set; }
-        public double Aumento { get; set; }
-        public double Reajuste { get; set; }
-        public string Cargo { get; set; }
-        public Status Status { get; set; }
+        public string nome { get; set; }
+        public DateTime data_nasc { get; set; }
+        public string cpf { get; set; }
+        public char sexo { get; set; }
+        public string nacionalidade { get; set; }
+        public double salario { get; set; }
+        public string cargo { get; set; }
+        public Status status { get; set; }
 
         public Funcionarios(List<Funcionarios> listRh)
         {
@@ -27,70 +25,82 @@ namespace RH_Life.Entities
             Console.WriteLine("=============================");
             Console.WriteLine();
             Console.Write("Nome: ");
-            Nome = Console.ReadLine();
+            nome = Console.ReadLine();
             bool aprovado = true;
             List<char> numerais = new List<char>() { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             while (aprovado)
             {
-                if (numerais.Where(x => Nome.Contains(x)).Any())
+                if (numerais.Where(x => nome.Contains(x)).Any())
                 {
                     Console.WriteLine("Entrada incorreta");
                     Console.Write("Digite novamente: ");
-                    Nome = Console.ReadLine();
+                    nome = Console.ReadLine();
                 }
-                else if (Nome.Length > 50)
+                else if (nome.Length > 50)
                 {
                     Console.WriteLine("Numero de caractere excedido");
                     Console.Write("Digite Novamente: ");
-                    Nome = Console.ReadLine();
+                    nome = Console.ReadLine();
                 }
                 else 
                 {
                     aprovado = false;
                 }
             }
-
             Console.Write("Salario R$: ");
-            Salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             Console.Write("Data de Nascimento ex.dd/mm/aaaa: ");
             ValidandoDataNascimento();
             Console.Write("CPF ex.999.999.999-99: ");
-            CPF = Console.ReadLine();
-            while (!ValidandoCpf(CPF))
+            cpf = Console.ReadLine();
+            bool validador = !ValidandoCpf(cpf) || ConfereCpfDuplicado(listRh, cpf); // Criei uma variável booleana recebendo os 2 metodos
+            while (validador)// o while vai avaliar os metodos 
             {
-                Console.WriteLine("CPF Inválido");
-                Console.Write("Digite Novamente: ");
-                CPF = Console.ReadLine();
-                ValidandoCpf(CPF);
+                if (!ValidandoCpf(cpf))
+                {
+                    Console.WriteLine("CPF Inválido");
+                    Console.Write("Digite Novamente: ");
+                    cpf = Console.ReadLine();
+                }
+                else if (ConfereCpfDuplicado(listRh, cpf))
+                {
+                    Console.WriteLine("CPF já consta no banco de dados!!!!");
+                    Console.Write("Digite Novamente: ");
+                    cpf = Console.ReadLine();
+                }
+                else 
+                {
+                    validador = false;
+                }
             }
             Console.Write("Sexo M / F: ");
-            Sexo = char.Parse(Console.ReadLine());
+            sexo = char.Parse(Console.ReadLine());
 
-            while (!(Sexo == 'm' || Sexo == 'f' || Sexo == 'M' || Sexo == 'F'))
-            {   
+            while (!(sexo == 'm' || sexo == 'f' || sexo == 'M' || sexo == 'F'))
+            {
                 Console.WriteLine("Favor inserir somente: m / f ou M / F");
                 Console.Write("Digite Novamente: ");
-                Sexo = char.Parse(Console.ReadLine());
-            } 
+                sexo = char.Parse(Console.ReadLine());
+            }
             Console.Write("Nacionalidade: ");
-            Nacionalidade = Console.ReadLine();
+            nacionalidade = Console.ReadLine();
             bool teste = true;
-            List<char> numeros = new List<char>(){ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            List<char> numeros = new List<char>() { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             while (teste)
             {    /* usei Lambda expression
                  * .where para ele verificar dentro da
                  * variaval Nacionalidade se tem Valor */
-                if (numeros.Where(x => Nacionalidade.Contains(x)).Any())
+                if (numeros.Where(x => nacionalidade.Contains(x)).Any())
                 {
                     Console.WriteLine("Entrada não Aceita");
                     Console.Write("Digite Novamente: ");
-                    Nacionalidade = Console.ReadLine();
+                    nacionalidade = Console.ReadLine();
                 }
-                else if (Nacionalidade.Length >= 20)
+                else if (nacionalidade.Length >= 20)
                 {
                     Console.WriteLine("Numero de caractere excedido");
                     Console.Write("Digite Novamente: ");
-                    Nacionalidade = Console.ReadLine();
+                    nacionalidade = Console.ReadLine();
                 }
                 else
                 {
@@ -98,17 +108,17 @@ namespace RH_Life.Entities
                 }
             }
             Console.Write("Cargo: ");
-            Cargo = Console.ReadLine();
-            while (Cargo.Length >= 20)
+            cargo = Console.ReadLine();
+            while (cargo.Length >= 20)
             {
                 Console.WriteLine("Numero de caractere extenso.");
                 Console.Write("Digite novamente: ");
-                Cargo = Console.ReadLine();
+                cargo = Console.ReadLine();
             }
             Console.Write("Status 0 - Trabalhando / 1 - Desligado: ");
             string Status = Console.ReadLine();
             Status status = (Status)Enum.Parse(typeof(Status), Status);
-            if (Status != "0" || Status != "Trabalhando" || Status != "1" || Status != "Desligado")
+            while (!(Status == "0" || Status == "Trabalhando" || Status == "1" || Status == "Desligado"))
             {
                 Console.WriteLine("Favor Usar Somente as opções: 0 - Trabalhando / 1 - Desligado  ");
                 Console.Write("Digite Novamente: ");
@@ -130,20 +140,20 @@ namespace RH_Life.Entities
 
             CPF = CPF.Trim();
             CPF = CPF.Replace(".", "").Replace("-", "");
-            if (CPF.Length!=11)
-              return false;
+            if (CPF.Length != 11)
+                return false;
             temCPF = CPF.Substring(0, 9);
             soma = 0;
             for (int i = 0; i < 9; i++)
             {
-                soma += int.Parse(temCPF[i].ToString()) * (multiplicador1-i);
+                soma += int.Parse(temCPF[i].ToString()) * (multiplicador1 - i);
             }
             resto = soma % 11;
             if (resto < 2)
             {
                 resto = 0;
             }
-            else 
+            else
             {
                 resto = 11 - resto;
             }
@@ -152,7 +162,7 @@ namespace RH_Life.Entities
             soma = 0;
             for (int i = 0; i < 10; i++)
             {
-                soma += int.Parse(temCPF[i].ToString()) * (multiplicador2-i);
+                soma += int.Parse(temCPF[i].ToString()) * (multiplicador2 - i);
             }
             resto = soma % 11;
             if (resto < 2)
@@ -165,7 +175,18 @@ namespace RH_Life.Entities
             }
             digito = digito + resto.ToString();
             return CPF.EndsWith(digito);
+        }
 
+        public bool ConfereCpfDuplicado(List<Funcionarios> listRh,string CPF)
+        {
+            for (int i = 0; i < listRh.Count; i++)
+            {
+                if (listRh[i].cpf == CPF)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static bool ValidandoDataNascimento() 

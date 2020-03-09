@@ -218,7 +218,6 @@ namespace RH_Life.Entities.Controller
                 }
 
             }
-
             return data_Nasc;
         }
     }

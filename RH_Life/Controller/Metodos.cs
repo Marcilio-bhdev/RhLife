@@ -12,7 +12,6 @@ namespace RH_Life.Entities.Controller
    public class Metodos
     {
         Banco banco = new Banco();
-
         public void ListarFuncionario(Banco banco)
         {
             for (int i = 0; i < banco.listRh.Count; i++)
@@ -32,7 +31,7 @@ namespace RH_Life.Entities.Controller
                 }
                 else
                 {
-                    Console.WriteLine($"Salario: {banco.listRh[i].salario.ToString("F2", CultureInfo.InvariantCulture)}");
+                    Console.WriteLine($"Salario: {banco.listRh[i].salario.ToString("F4", CultureInfo.InvariantCulture)}");
                 }
                 Console.WriteLine($"Cargo: {banco.listRh[i].cargo}");
                 Console.WriteLine($"Status: {banco.listRh[i].status}");
@@ -180,6 +179,7 @@ namespace RH_Life.Entities.Controller
 
         public DateTime ValidandoDataNascimento(List<Funcionarios> listRh)
         {
+            bool validandoData = true;
             DateTime data_Nasc;
             var convertido = DateTime
              .TryParseExact(Console.ReadLine(),
@@ -187,28 +187,38 @@ namespace RH_Life.Entities.Controller
                             CultureInfo.InvariantCulture,
                             DateTimeStyles.None,
                             out data_Nasc);
-            while ((convertido == false))
+            while (validandoData)
             {
-                Console.WriteLine("Formato incorreto!!!");
-                Console.Write("Favor insira data correta: ");
-                convertido = DateTime
-                .TryParseExact(Console.ReadLine(),
-                               "dd/MM/yyyy",
-                               CultureInfo.InvariantCulture,
-                               DateTimeStyles.None,
-                               out data_Nasc);
+                if (convertido == false)
+                {
+                    Console.WriteLine("Formato incorreto!!!");
+                    Console.Write("Favor insira data correta: ");
+                    convertido = DateTime
+                    .TryParseExact(Console.ReadLine(),
+                                   "dd/MM/yyyy",
+                                   CultureInfo.InvariantCulture,
+                                   DateTimeStyles.None,
+                                   out data_Nasc);
+
+                }
+                else if (data_Nasc > DateTime.Now)
+                {
+                    Console.WriteLine("Data inválida!!!");
+                    Console.Write("Favor insira data correta: ");
+                    convertido = DateTime
+                    .TryParseExact(Console.ReadLine(),
+                                   "dd/MM/yyyy",
+                                   CultureInfo.InvariantCulture,
+                                   DateTimeStyles.None,
+                                   out data_Nasc);
+                }
+                else
+                {
+                    validandoData = false;
+                }
+
             }
-            if (data_Nasc > DateTime.Now)
-            {
-                Console.WriteLine("Data inválida!!!");
-                Console.Write("Favor insira data correta: ");
-                convertido = DateTime
-                .TryParseExact(Console.ReadLine(),
-                               "dd/MM/yyyy",
-                               CultureInfo.InvariantCulture,
-                               DateTimeStyles.None,
-                               out data_Nasc);
-            }
+
             return data_Nasc;
         }
     }

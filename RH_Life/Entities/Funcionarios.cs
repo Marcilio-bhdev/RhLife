@@ -22,7 +22,7 @@ namespace RH_Life.Entities
         public Funcionarios(List<Funcionarios> listRh)
         {
             Metodos metodos = new Metodos();
-            
+
             Console.WriteLine("=============================");
             Console.WriteLine("|  Cadastro de Funcionário  |");
             Console.WriteLine("=============================");
@@ -45,7 +45,7 @@ namespace RH_Life.Entities
                     Console.Write("Digite Novamente: ");
                     nome = Console.ReadLine();
                 }
-                else 
+                else
                 {
                     aprovado = false;
                 }
@@ -71,7 +71,7 @@ namespace RH_Life.Entities
                     Console.Write("Digite Novamente: ");
                     cpf = Console.ReadLine();
                 }
-                else 
+                else
                 {
                     validador = false;
                 }
@@ -131,6 +131,6 @@ namespace RH_Life.Entities
             Console.WriteLine("====================================");
         }
 
-        
+
     }
 }
